@@ -109,6 +109,19 @@ _surrogate_world['NRHybSur3dq8'] = \
   '''https://journals.aps.org/prd/abstract/10.1103/PhysRevD.99.064045''',
   'b42cd577f497b1db3da14f1e4ee0ccd1')
 
+_surrogate_world['NRHybSur2dq15'] = \
+  surrogate_info(\
+  'https://zenodo.org/record/3348115/files/NRHybSur2dq15.h5',
+  '''Surrogate model for aligned-spin binary black holes with mass ratios q<=15,
+  spin magnitude <=0.5 on the heavier black hole, and zero on the lighter
+  black hole. The model is trained on NR waveforms that have been
+  hybridized using EOB and spans the entire LIGO frequency band. This model
+  is  presented in Varma et al. 2020, arxiv:xxxx.xxxx. FIXME Available modes are
+  [(2,2), (2,1), (3,3), (4,4), and (5,5)]. The m<0 modes are deduced from the
+  m>0 modes.''',
+  '''FIXME URL''',
+  'b42cd577f497b1db3da14f1e4ee0ccd1')
+
 _surrogate_world['NRSur7dq4'] = \
   surrogate_info(\
   'https://zenodo.org/record/3348115/files/NRSur7dq4.h5',
