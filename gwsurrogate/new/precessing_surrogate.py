@@ -711,9 +711,16 @@ def _eval_comp(data, q, chiA, chiB):
 
     return np.array(nodes).dot(data['EI_basis'])
 
-def _assemble_mode_pair(rep, rem, imp, imm):
-    hplus = rep + 1.j*imp
-    hminus = rem + 1.j*imm
+def _assemble_mode_pair(rep, rem, imp, imm, ell):
+    # quick hack to remove mode asymmetries
+
+    if (ell%2) == 0:
+        hplus = rep + 1.j*imp
+        hminus = np.zeros(len(hplus)) #rem + 1.j*imm
+    else:
+        hminus = rem + 1.j*imm
+        hplus = np.zeros(len(hminus)) #rep + 1.j*imp
+        
     # hplus and hminus were built with the (ell, -m) mode as the
     # reference mode:
     #   hplus = 0.5*( h^{ell, -m} + h^{ell, m}* )
@@ -774,7 +781,8 @@ ellMax: The maximum ell mode to evaluate.
                 rem = _eval_comp(self.data['%s_%s_Re-'%(ell, m)], q, chiA,chiB)
                 imp = _eval_comp(self.data['%s_%s_Im+'%(ell, m)], q, chiA,chiB)
                 imm = _eval_comp(self.data['%s_%s_Im-'%(ell, m)], q, chiA,chiB)
-                h_posm, h_negm = _assemble_mode_pair(rep, rem, imp, imm)
+                
+                h_posm, h_negm = _assemble_mode_pair(rep, rem, imp, imm, ell)
                 modes[ell*(ell+1) - 4 + m] = h_posm
                 modes[ell*(ell+1) - 4 - m] = h_negm
 
@@ -1092,4 +1100,4 @@ Returns:
         else:
             dynamics = None
 
-        return timesM, h, dynamics
+        return timesM, h, dynamics, h_coorb

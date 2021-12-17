@@ -1859,7 +1859,7 @@ class SurrogateEvaluator(object):
         # Get waveform modes and domain in dimensionless units
         fM_low = f_low*t_scale
         fM_ref = f_ref*t_scale
-        domain, h, dynamics = self._sur_dimless(x, fM_low=fM_low,
+        domain, h, dynamics, h_coorb = self._sur_dimless(x, fM_low=fM_low,
             fM_ref=fM_ref, dtM=dtM, timesM=timesM, dfM=dfM,
             freqsM=freqsM, mode_list=mode_list, ellMax=ellMax,
             precessing_opts=precessing_opts, tidal_opts=tidal_opts,
@@ -1915,7 +1915,7 @@ class SurrogateEvaluator(object):
             else:
                 h *= amp_scale
 
-        return domain, h, dynamics
+        return domain, h, dynamics, h_coorb
 
 
 
